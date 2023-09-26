@@ -1,0 +1,132 @@
+global uint8_t*bcsrc;
+
+enum {
+  OP_END=0,		// 1st time: assets loaded, 2nd time: episode done
+
+  // sound
+  OP_PLAYTRACKERSONG,	// songindex, order
+  OP_PLAYSAMPLE,	// ch, sampleindex
+  OP_SETSAMPLEVOL,	// ch, vol
+  OP_PREPFADEOUT,	// ch(signed), time
+  OP_SETSOUNDFLAGS,	// bub.fxflags
+  OP_PLAYSOUNDS,	// fxcode (string)
+  // ...
+
+  // asset loadings
+  OP_LOADBITMAP,	// fn
+  OP_LOADSAMPLE,	// fn
+  OP_LOADTRACKERSONG,	// fn
+  
+  // other texts
+  OP_SHOWTITLE,
+  OP_NOTITLE,
+  
+  // non-live sayings
+  OP_SAYSCREEN,
+  OP_SAYSCREEN_LINESPD,
+  OP_PREPSAYSCREEN,
+  OP_PREPSAYSCREEN_LINESPD,
+  OP_PREPSAYSCREEN_2SPD,
+
+  // sprite-related
+  OP_MAKECOMMONSPRITE,	// +type; id	4 of 6 types: dumb, charry, vehicle, multi, clock, rect
+  OP_MAKERARESPRITE = OP_MAKECOMMONSPRITE+4,	// +type; type-specific extras. dumb, charry, vehicle, multi, clock, rect
+  OP_SETXYZ = OP_MAKERARESPRITE+6,
+  OP_SETDIRECTION,
+  OP_DROPSPRITE = OP_SETDIRECTION+4,  // 0,1,2; 3 = no-mirror
+  OP_RESPAWN,
+  OP_WALK,
+  OP_SETTORSOANIM,
+  OP_SETTORSO,
+  OP_SETLEGSANIM,
+  OP_SETLEGS,
+  OP_SETLIGHT,
+
+  // character actions: speech
+  OP_TALKER,
+  OP_SAY,
+  OP_SAY_CONTINUE,
+  OP_PREPSAY,
+  OP_PREPSAY_CONTINUE,
+  OP_NOBUBBLE,
+  OP_SCREENTALKER,
+  OP_SETCOTALKER,
+  
+  // character actions: non-speech
+  OP_SETFACE,
+  OP_CARRY_WITHTYPEANDSLOT, // kaikki carryt hoituvat tällä
+  OP_NOCARRY,
+  OP_TOGGLEASTRAL, // deprekoi
+  OP_SETCHARRYFLAGS,  
+  OP_SITON,
+  OP_CHANGECLOTHES,
+  OP_CHANGECLOTHESFORALL,
+  OP_SIT,
+  OP_DRINK,
+  OP_SETCARRYTYPE,
+  OP_STAND,
+
+  // camera stuff
+  OP_SETCAMOFFSET,
+  OP_SETCAMDEST,
+  OP_SETWORLDMODES,
+  OP_SETTHUNDER,
+  OP_SETTIMEVARS,
+  OP_SETVIEWMODES,
+  OP_SETSHAKE,
+  OP_SETSPLASH,
+  OP_SETBUBBLEVARS,
+  OP_SETBUBBLETYPINGVARS,
+  OP_SETFOCUS,
+  OP_FOCUSONTALKER,
+  OP_FIXATECAMERA,
+  OP_FOCUSONXY,
+  OP_SETZOOM,
+  OP_SETCAMERAMODE,
+  OP_SETALTPALETTE,
+  
+  // waitings
+  OP_MAKEFRAMES,
+  OP_WAITFORWALKS,
+  OP_WAITFORSAY,
+  OP_WAITFORSCREENSAY,
+  OP_WAITFORLIVESAY,
+
+  // places
+  OP_PLACEINIT,
+  OP_SETBG,
+  OP_SETBGANDALT,
+  OP_SWAPALTBGPART,
+  OP_SWAPALTBG,
+  OP_BGFILLRECT,
+  OP_NEWBG,
+
+  // textscreen
+  OP_SCREENINIT,
+  OP_CLRSCR,
+  OP_SCRWRITE,
+  OP_SETTERMINALMODES,
+  OP_NOTRMREFRESH,
+  OP_TRMONCHAR_RESET,
+
+  // gfxscreen
+  OP_SHOWGFX,
+  OP_NOGFXREFRESH,
+
+  // setmem
+  /*
+  OP_SETVAR8,
+  OP_SETVAR16,
+  OP_SETVAR32,
+  OP_SETMEM,
+  */
+
+  // custom
+  OP_WAITWITHBOBSMAGIC,
+  OP_SPLITSCREEN_USER,
+  OP_SPLITSCREEN_SYSOP,
+  OP_IRCSAY,
+  OP_IRCSAY_FROMLOCAL,
+  // ja softakohtaiset initit
+  
+};

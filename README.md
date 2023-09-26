@@ -3,7 +3,7 @@
 This is the full source code (including graphic and sound assets) for the
 animated series "PC-lamerit" I worked on between 2015-2019. It is uploaded
 here for preservation purposes. The episodes can be found as YouTube videos
-in both Finnish and English.
+in both Finnish and English. http://viznut.fi/cwu/
 
 Note that this was never seriously intended to be released as source code.
 You find a lot of kludgy and messy stuff, so don't take it as an example for
